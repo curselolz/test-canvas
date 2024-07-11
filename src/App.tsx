@@ -38,6 +38,10 @@ const App: React.FC = () => {
     }
   };
 
+  const handleDelete = () => {
+    setBackground(null)
+  };
+
   return (
     <Container>
       <CssBaseline />
@@ -47,9 +51,12 @@ const App: React.FC = () => {
         </Typography>
         <AddPointButton addPoint={addPoint} />
         <Button variant="contained" component="label">
-          Upload Background
+          {background ? 'Replace Background' : 'Upload Background'}
           <input type="file" hidden onChange={handleBackgroundChange} />
         </Button>
+        {background ? (
+          <Button variant="contained" onClick={handleDelete} component="label">Delete</Button>
+        ) : null}
         <Canvas points={points} background={background} />
         <PointList points={points} updatePoint={updatePoint} deletePoint={deletePoint} />
       </Box>
